@@ -47,7 +47,7 @@ app.post("/repositories", (request, response) => {
 
   repositories.push(repositorie);
 
-  return response.json(repositories);
+  return response.json(repositorie);
 
 });
 
@@ -61,17 +61,18 @@ app.put("/repositories/:id",validateRepoId, (request, response) => {
   const likes = repositories[repoPosition].likes;
 
   if (repoPosition < 0) {
-    return response.status(400).json({ "Error": "Repositorie Not Found" });
+    return response.status(400).json({ "error": "Repositorie Not Found" });
   }  
 
   const repositorie = {id ,title, url, techs, likes}
 
   repositories[repoPosition] = repositorie;
 
-  return response.json({
-    "Status": "Update Sucessfull",
-    "Updated Repositorie": repositorie
-  })
+  // return response.json({
+  //   "Status": "Update Sucessfull",
+  //   "Updated Repositorie": repositorie
+  // })
+  return response.json(repositorie)
 
 });
 
@@ -81,7 +82,7 @@ app.delete("/repositories/:id", (request, response) => {
   const repoPosition = repositories.findIndex(repositorie => repositorie.id === id); 
   
   if (repoPosition < 0) {
-    return response.status(400).json({ "Error": "Repositorie Not Found" });
+    return response.status(400).json({ "error": "Repositorie Not Found" });
   }  
 
   repositories.splice(repoPosition, 1);
@@ -95,7 +96,7 @@ app.post("/repositories/:id/like", (request, response) => {
   const repoPosition = repositories.findIndex(repositorie => repositorie.id === id); 
 
   if (repoPosition < 0) {
-    return response.status(400).json({ "Error": "Repositorie Not Found" });
+    return response.status(400).json({ "error": "Repositorie Not Found" });
   }  
 
   const repositorie = repositories[repoPosition];
